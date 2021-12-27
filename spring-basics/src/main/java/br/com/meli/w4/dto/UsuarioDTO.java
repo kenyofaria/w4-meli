@@ -1,6 +1,8 @@
 package br.com.meli.w4.dto;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -45,6 +47,10 @@ public class UsuarioDTO {
 			.senha(usuario.getSenha())
 			.dataCriacao(usuario.getDataCriacao())
 			.build();
+	}
+	
+	public static List<UsuarioDTO> converte(List<Usuario> usuarios){
+		return usuarios.stream().map(u -> converte(u)).collect(Collectors.toList());
 	}
 	
 }
