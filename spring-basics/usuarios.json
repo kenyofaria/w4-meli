@@ -1,0 +1,13 @@
+[ {
+  "nome" : "kenyo",
+  "dataNascimento" : [ 1980, 2, 25 ],
+  "sexo" : "m",
+  "dataCriacao" : [ 2021, 12, 28 ],
+  "senha" : "98392982"
+}, {
+  "nome" : "mauri",
+  "dataNascimento" : [ 1980, 2, 25 ],
+  "sexo" : "m",
+  "dataCriacao" : [ 2021, 12, 28 ],
+  "senha" : "98392982"
+} ]
