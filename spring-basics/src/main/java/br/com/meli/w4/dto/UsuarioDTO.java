@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.meli.w4.entity.Usuario;
@@ -18,6 +22,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UsuarioDTO {
 
+	@NotNull
+	@NotEmpty(message = "nome é obrigatório")
+	@Size(min = 3, message = "tamanho minimo 3")
 	private String nome;
 	private LocalDate dataNascimento;
 	private char sexo;

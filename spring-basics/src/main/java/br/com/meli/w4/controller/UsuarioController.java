@@ -3,6 +3,8 @@ package br.com.meli.w4.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UsuarioDTO> cadastra(@RequestBody UsuarioDTO dto, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<UsuarioDTO> cadastra(@Valid @RequestBody UsuarioDTO dto, UriComponentsBuilder uriBuilder){
 		Usuario usuario = UsuarioDTO.converte(dto);
 		usuarioService.salvar(usuario);
 		URI uri = uriBuilder

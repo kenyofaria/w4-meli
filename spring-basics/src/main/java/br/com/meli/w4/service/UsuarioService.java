@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import br.com.meli.w4.controller.repository.UsuarioRepository;
+
 import br.com.meli.w4.entity.Usuario;
+import br.com.meli.w4.repository.UsuarioRepository;
 import exception.RepositoryException;
 
 @Service
