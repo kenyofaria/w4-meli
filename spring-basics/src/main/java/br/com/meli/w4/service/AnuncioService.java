@@ -23,12 +23,13 @@ public class AnuncioService {
 		if(anuncio.getPreco().compareTo(new BigDecimal(0)) <= 0)
 			throw new BusinessException("Nao eh permitido registro de anuncio com valor zero");
 		try {
-			this.anuncioRepository.salva(anuncio);
+				this.anuncioRepository.salva(anuncio);
 		} catch (IOException e) {
 			throw new BusinessException("Erro ao persistir o anuncio");
 		}
 		return anuncio;
 	}
+	
 
 	public List<Anuncio> listagem() {
 		try {
