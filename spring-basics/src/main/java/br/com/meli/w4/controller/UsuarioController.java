@@ -52,6 +52,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(UsuarioDTO.converte(this.usuarioService.lista(ano, sexo)));
 	}
 
+	
+	@GetMapping("/list")
+	public ResponseEntity<List<UsuarioDTO>> obter() {
+		return ResponseEntity.ok(UsuarioDTO.converte(this.usuarioService.lista()));
+	}
+	
 
 	@GetMapping("/list/{ano}")
 	private ResponseEntity<List<UsuarioDTO>> getList(@PathVariable Integer ano) {

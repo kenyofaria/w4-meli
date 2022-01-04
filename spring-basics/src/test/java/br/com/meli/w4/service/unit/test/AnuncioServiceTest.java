@@ -1,4 +1,4 @@
-package br.com.meli.w4.service.test;
+package br.com.meli.w4.service.unit.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
