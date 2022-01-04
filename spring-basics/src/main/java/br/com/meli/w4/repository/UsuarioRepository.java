@@ -22,10 +22,11 @@ public class UsuarioRepository implements OurRepository<Usuario, Long>{
 	private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 	private final String PATH = "usuarios.json";
 	
-	public void salva(Usuario usuario) throws IOException {
+	public Usuario salva(Usuario usuario) throws IOException {
 		usuario.setId((long) usuarios.size()+1);
 		usuarios.add(usuario);
 		objectMapper.writeValue(new File(PATH), usuarios);
+		return usuario;
 	}
 	
 	public List<Usuario> listagem() throws IOException{

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface OurRepository <T,U>{
 
-	void salva(T t) throws IOException;
+	T salva(T t) throws IOException;
 	List<T> listagem()  throws IOException;
 	T get(U id);
 }
