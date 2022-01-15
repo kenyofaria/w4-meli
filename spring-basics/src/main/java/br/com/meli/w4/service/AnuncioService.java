@@ -1,6 +1,5 @@
 package br.com.meli.w4.service;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -22,20 +21,11 @@ public class AnuncioService {
 	public Anuncio registrar(Anuncio anuncio) {
 		if(anuncio.getPreco().compareTo(new BigDecimal(0)) <= 0)
 			throw new BusinessException("Nao eh permitido registro de anuncio com valor zero");
-		try {
-				this.anuncioRepository.salva(anuncio);
-		} catch (IOException e) {
-			throw new BusinessException("Erro ao persistir o anuncio");
-		}
-		return anuncio;
+		return this.anuncioRepository.save(anuncio);
 	}
 	
 
 	public List<Anuncio> listagem() {
-		try {
-			return this.anuncioRepository.listagem();
-		} catch (IOException e) {
-			throw new BusinessException("Erro ao recuperar os anuncios");
-		}
+		return this.anuncioRepository.findAll();
 	}
 }
