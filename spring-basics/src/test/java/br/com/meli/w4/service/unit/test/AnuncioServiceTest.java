@@ -28,7 +28,7 @@ public class AnuncioServiceTest {
 				.preco(new BigDecimal(15.00)).build();
 				
 		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		Mockito.when(mock.salva(anuncio)).thenReturn(anuncio);
+		Mockito.when(mock.save(anuncio)).thenReturn(anuncio);
 		AnuncioService anuncioService = new AnuncioService(mock);
 		
 		//act

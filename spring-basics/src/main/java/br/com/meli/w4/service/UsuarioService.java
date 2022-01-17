@@ -1,18 +1,17 @@
 package br.com.meli.w4.service;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import br.com.meli.w4.entity.Usuario;
 import br.com.meli.w4.repository.UsuarioRepository;
-import exception.RepositoryException;
 
 @Service
 public class UsuarioService {
@@ -27,55 +26,31 @@ public class UsuarioService {
 	
 	public void salvar(Usuario usuario) {
 		if(maiorIdade(usuario)) {
-			try {
-				usuarioRepository.salva(usuario);
-				logger.debug("usuario salvo");
-			}catch(IOException e) {
-				logger.error(e.getMessage());
-				logger.debug("passando no catch");
-				throw new RepositoryException("MSG Customizada: Erro ao gravar o usuario");
-			}
+			this.usuarioRepository.save(usuario);
 		}else {
 			throw new RuntimeException("usuario deve ser maior de idade");
 		}
 	}
 	
 	public List<Usuario> lista(){
-		List<Usuario> usuarios = null;
-		try {
-			usuarios = usuarioRepository.listagem();
-		} catch (IOException e) {
-			throw new RepositoryException("erro ao recuperar os usuarios");
-		}
-		return usuarios;
+		return this.usuarioRepository.findAll();
 	}
 	
 	public List<Usuario> lista(Integer ano, char sexo){
-		try {
-			return usuarioRepository.listagem().stream()
-					.filter(u -> u.getDataNascimento().getYear() == ano)
-					.filter(u -> u.getSexo() == sexo).collect(Collectors.toList());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return lista().stream()
+				.filter(u -> u.getDataNascimento().getYear() == ano)
+				.filter(u -> u.getSexo() == sexo).collect(Collectors.toList());
 	}
 	
 	public List<Usuario> lista(Integer ano){
-		try {
-			return usuarioRepository.listagem().stream()
-					.filter(u -> u.getDataNascimento().getYear() == ano)
-					.collect(Collectors.toList());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return lista().stream()
+				.filter(u -> u.getDataNascimento().getYear() == ano)
+				.collect(Collectors.toList());
 	}
 	
 	public Usuario obter(Long id) {
-		return usuarioRepository.get(id);
+		 Optional<Usuario> op = this.usuarioRepository.findById(id);
+		 return op.orElse(new Usuario());
 	}
 	
 	private boolean maiorIdade(Usuario usuario) {

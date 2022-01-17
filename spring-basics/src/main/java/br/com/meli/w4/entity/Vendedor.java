@@ -1,12 +1,14 @@
 package br.com.meli.w4.entity;
 
-import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,15 +20,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Anuncio {
+public class Vendedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String codigo;
-	private String titulo;
-	private String categoria;
-	private BigDecimal preco;
-	@ManyToOne
-	private Vendedor vendedor;
+	
+	@Column(nullable = false)
+	private String nome;
+	
+	@Embedded
+	private Endereco[] endereco = new Endereco[1];
+	
+	@OneToOne
+	private Usuario usuario;
+	
 }
