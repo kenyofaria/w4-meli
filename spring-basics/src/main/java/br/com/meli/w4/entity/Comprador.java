@@ -1,7 +1,6 @@
 package br.com.meli.w4.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +25,6 @@ public class Comprador {
 	
 	@Column(nullable = false)
 	private String nome;
-	
-	@Embedded
-	private Endereco endereco;
 	
 	@OneToOne
 	private Usuario usuario;

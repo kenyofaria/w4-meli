@@ -20,6 +20,10 @@ public class VendedorService {
 		this.vendedorRepository.save(vendedor);
 	}
 	
+	public void atualiza(Vendedor vendedor) {
+		this.vendedorRepository.saveAndFlush(vendedor);
+	}
+	
 	public Vendedor get(Integer id) {
 		Optional<Vendedor> findById = this.vendedorRepository.findById(id);
 		return findById.orElse(new Vendedor());
