@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,16 +39,43 @@ public class SpringBasicsApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		//SpringApplication.run(SpringBasicsApplication.class, args);
-		persisteAnuncio();
-		//persisteUsuario();
+		//persisteAnuncio();
+		//persisteUsuarios();
 		//persisteVendedor();
 		//adicionaEnderecoAoVendedor();
 		//adicionaCaracteristicas();
-		
+		//buscaUsuariosPorSexo();
+		//listaAnunciosPorVendedor();
+		listaDeCaracteristicasPorAnuncio();
 		
 	}
 
 	
+	private void listaDeCaracteristicasPorAnuncio() {
+		List<Caracteristica> listaCaracteristicas = this.anuncioService.listaCaracteristicas(18);
+		listaCaracteristicas.forEach(c -> System.out.println(c.getNome() + "    " + c.getValor()));
+	}
+
+
+	private void listaAnunciosPorVendedor() {
+		List<Anuncio> listagem = this.anuncioService.listagem(4);
+		listagem.forEach(item->System.out.println(item.getId()));
+		
+	}
+
+
+	private void buscaUsuariosPorSexo() {
+		System.out.println("apenas mulheres ------------------ \n\n");
+		List<Usuario> mulheres = this.usuarioService.getMulheres();
+		mulheres.forEach(m -> System.out.println(m.getNome()));
+		
+		System.out.println("\n\n apenas homens ------------------ \n\n");
+		List<Usuario> homens = this.usuarioService.getHomens();
+		homens.forEach(m -> System.out.println(m.getNome()));
+		
+	}
+
+
 	private void adicionaCaracteristicas() {
 		Caracteristica volume = Caracteristica.builder().nome("volume").build();
 		Caracteristica area = Caracteristica.builder().nome("area").build();
@@ -80,14 +105,23 @@ public class SpringBasicsApplication implements CommandLineRunner{
 		
 	}
 	
-	private void persisteUsuario() {
-		Usuario usuario = Usuario.builder()
-							.dataNascimento(LocalDate.of(1995, Month.DECEMBER, 30))
-							.nome("joice aurino")
+	private void persisteUsuarios() {
+		Usuario mauri = Usuario.builder()
+							.dataNascimento(LocalDate.of(1981, Month.APRIL, 30))
+							.nome("Mauri Klein")
 							.senha("123")
-							.sexo('F')
+							.sexo('M')
 							.build();
-		usuarioService.salvar(usuario);
+		
+		Usuario michele = Usuario.builder()
+				.dataNascimento(LocalDate.of(1987, Month.AUGUST, 27))
+				.nome("Michele")
+				.senha("123")
+				.sexo('F')
+				.build();
+		
+		usuarioService.salvar(mauri);
+		usuarioService.salvar(michele);
 	}
 
 	private void persisteVendedor() {
@@ -145,10 +179,6 @@ public class SpringBasicsApplication implements CommandLineRunner{
 	private void persisteAnuncio() {
 		
 		Vendedor vendedor = this.vendedorService.get(4);
-		Caracteristica op1 = this.caracteristicaRepository.getOne(1);
-		Caracteristica op3 = this.caracteristicaRepository.getOne(3);
-		Caracteristica op4 = this.caracteristicaRepository.getOne(4);
-		
 		Anuncio anuncio = Anuncio.builder()
 			.categoria("ferramentas")
 			.codigo("MLB1233423")
@@ -156,9 +186,9 @@ public class SpringBasicsApplication implements CommandLineRunner{
 			.titulo("armario de servico")
 			.vendedor(vendedor)
 		.build();
-		anuncio.adicionaCaracteristica(op1);
-		anuncio.adicionaCaracteristica(op3);
-		anuncio.adicionaCaracteristica(op4);
+		anuncio.adicionaCaracteristica(Caracteristica.builder().id(1).build(), "valor 1");
+		anuncio.adicionaCaracteristica(Caracteristica.builder().id(3).build(), "valor 3");
+		anuncio.adicionaCaracteristica(Caracteristica.builder().id(4).build(), "valor 4");
 		anuncioService.registrar(anuncio);
 	}
 

@@ -58,4 +58,12 @@ public class UsuarioService {
 		int years = Period.between(usuario.getDataNascimento(), dataAtual).getYears();
 		return years >= 18;
 	}
+	
+	public List<Usuario> getMulheres(){
+		return this.usuarioRepository.findBySexo('F');
+	}
+	
+	public List<Usuario> getHomens(){
+		return this.usuarioRepository.findBySexo('M');
+	}
 }
