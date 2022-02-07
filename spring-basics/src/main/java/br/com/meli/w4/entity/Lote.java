@@ -1,28 +1,29 @@
 package br.com.meli.w4.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 @Entity
-public class Imovel {
+public class Lote {
 
 	@Id
-	private Integer numero;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String nome;
+
 	@ManyToOne
-	private Bairro bairro;
-	@OneToMany
-	private List<Comodo> comodos;
+	private RegistroCompra registroCompra;
+	
 }

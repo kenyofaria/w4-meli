@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,15 +16,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.meli.w4.entity.Anuncio;
 import br.com.meli.w4.entity.Caracteristica;
 import br.com.meli.w4.entity.Endereco;
+import br.com.meli.w4.entity.Lote;
+import br.com.meli.w4.entity.RegistroCompra;
 import br.com.meli.w4.entity.Usuario;
 import br.com.meli.w4.entity.Vendedor;
 import br.com.meli.w4.repository.CaracteristicaRepository;
+import br.com.meli.w4.repository.LoteRepository;
+import br.com.meli.w4.repository.RegistroCompraRepository;
 import br.com.meli.w4.service.AnuncioService;
 import br.com.meli.w4.service.UsuarioService;
 import br.com.meli.w4.service.VendedorService;
 
 @SpringBootApplication
-public class SpringBasicsApplication implements CommandLineRunner{
+public class SpringBasicsApplication{
 
 	@Autowired
 	private AnuncioService anuncioService;
@@ -34,11 +40,17 @@ public class SpringBasicsApplication implements CommandLineRunner{
 	private VendedorService vendedorService;
 	
 	@Autowired
+	private RegistroCompraRepository registroCompraRepository;
+	
+	@Autowired
+	private LoteRepository loteRepository;
+	
+	@Autowired
 	private CaracteristicaRepository caracteristicaRepository;
 	
-	@Override
-	public void run(String... args) throws Exception {
-		//SpringApplication.run(SpringBasicsApplication.class, args);
+//	@Override
+//	public void run(String... args) throws Exception {
+//		SpringApplication.run(SpringBasicsApplication.class, args);
 		//persisteAnuncio();
 		//persisteUsuarios();
 		//persisteVendedor();
@@ -46,9 +58,19 @@ public class SpringBasicsApplication implements CommandLineRunner{
 		//adicionaCaracteristicas();
 		//buscaUsuariosPorSexo();
 		//listaAnunciosPorVendedor();
-		listaDeCaracteristicasPorAnuncio();
+		//listaDeCaracteristicasPorAnuncio();
 		
-	}
+		//RegistroCompra rc = new RegistroCompra();
+		
+		//Lote bananas = Lote.builder().nome("lote de bananas").registroCompra(rc).build();
+	//	Lote laranjas = Lote.builder().nome("lote de laranjas").registroCompra(rc).build();
+		
+	//	rc.setLotes(Arrays.asList(bananas, laranjas));
+		
+//		Optional<Lote> lote = loteRepository.findById(1);
+//		lote.get().setNome("outro lote");
+//		loteRepository.save(lote.get());
+	//}
 
 	
 	private void listaDeCaracteristicasPorAnuncio() {
