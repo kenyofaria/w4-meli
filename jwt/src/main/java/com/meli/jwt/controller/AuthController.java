@@ -20,7 +20,7 @@ public class AuthController {
 	
 	@PostMapping
 	public String authenticate(@RequestBody Usuario usuario) {
-		UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword());
+		UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha());
 		Authentication authentication = manager.authenticate(dadosLogin);
 		return "pronto";
 	}
